@@ -9,11 +9,20 @@ const highScoreText = document.getElementById('highScore')
 const gridSize = 30
 let snake = [{ x: 15, y: 15 }]
 let food = generateFood()
-let highScore = 0
+let highScore = localStorage.getItem('highScore') || 0
 let direction = 'right'
 let gameInterval
 let gameSpeedDelay = 200
 let gameStarted = false
+
+function drawHighScore() {
+  if (localStorage.getItem('highScore') && highScore > 0) {
+    highScoreText.textContent = highScore.toString().padStart(3, '0')
+    highScoreText.style.display = 'block'
+  }
+}
+
+drawHighScore()
 
 // Draw game map, snake, food
 function draw() {
@@ -47,9 +56,6 @@ function setPosition(element, position) {
   element.style.gridColumn = position.x
   element.style.gridRow = position.y
 }
-
-// Testing draw function
-// draw()
 
 // Draw food function
 function drawFood() {
@@ -128,18 +134,30 @@ function handreKeyPress(event) {
   } else {
     switch (event.key) {
       case 'ArrowUp': {
+        if (direction === 'down') {
+          return
+        }
         direction = 'up'
         break
       }
       case 'ArrowDown': {
+        if (direction === 'up') {
+          return
+        }
         direction = 'down'
         break
       }
       case 'ArrowLeft': {
+        if (direction === 'right') {
+          return
+        }
         direction = 'left'
         break
       }
       case 'ArrowRight': {
+        if (direction === 'left') {
+          return
+        }
         direction = 'right'
         break
       }
@@ -201,6 +219,7 @@ function updateHighScore() {
   const currentScore = snake.length - 1
   if (currentScore > highScore) {
     highScore = currentScore
+    localStorage.setItem('highScore', highScore)
     highScoreText.textContent = highScore.toString().padStart(3, '0')
   }
   highScoreText.style.display = 'block'
