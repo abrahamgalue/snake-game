@@ -8,6 +8,7 @@ const highScoreText = document.getElementById('highScore')
 // Define game variables
 const gridSize = 30
 let snake = [{ x: 15, y: 15 }]
+let findElement = false
 let food = generateFood()
 let highScore = localStorage.getItem('highScore') || 0
 let direction = 'right'
@@ -68,8 +69,15 @@ function drawFood() {
 
 // Generate food
 function generateFood() {
-  const x = Math.floor(Math.random() * gridSize + 1)
-  const y = Math.floor(Math.random() * gridSize + 1)
+  let x, y
+
+  do {
+    x = Math.floor(Math.random() * gridSize + 1)
+    y = Math.floor(Math.random() * gridSize + 1)
+
+    findElement = snake.some(el => el.x === x && el.y === y)
+  } while (findElement)
+
   return { x, y }
 }
 
