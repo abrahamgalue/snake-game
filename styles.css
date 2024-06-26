@@ -122,3 +122,18 @@ body {
   text-transform: capitalize;
   margin: 0;
 }
+
+@media screen and (max-width: 790px) {
+  #game-board {
+    grid-template-columns: repeat(30, 10px);
+    grid-template-rows: repeat(30, 10px);
+  }
+
+  #instruction-text {
+    text-wrap: balance;
+  }
+
+  #logo {
+    width: 150px;
+  }
+}
