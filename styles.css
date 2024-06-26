@@ -36,13 +36,17 @@
   font-style: normal;
 }
 
+html {
+  height: 100%;
+}
+
 body {
-  display: flex;
   align-items: center;
-  justify-content: center;
-  height: 100vh;
-  margin: 0;
+  display: flex;
   font-family: 'VT323', monospace;
+  height: 100%;
+  justify-content: center;
+  margin: 0;
 }
 
 body {
@@ -116,24 +120,37 @@ body {
 }
 
 #instruction-text {
-  top: 60%;
   color: var(--white);
+  margin: 0;
   text-align: center;
   text-transform: capitalize;
-  margin: 0;
+  top: 60%;
+  user-select: none;
 }
 
 @media screen and (max-width: 790px) {
+  .game-border-1 {
+    border: var(--green-400) solid 5px;
+  }
+
+  .game-border-2 {
+    border: var(--green-500) solid 4px;
+  }
+
+  .game-border-3 {
+    border: var(--green-600) solid 15px;
+  }
+
   #game-board {
     grid-template-columns: repeat(30, 10px);
     grid-template-rows: repeat(30, 10px);
   }
 
-  #instruction-text {
-    text-wrap: balance;
-  }
-
   #logo {
     width: 150px;
+  }
+
+  #instruction-text {
+    text-wrap: balance;
   }
 }
